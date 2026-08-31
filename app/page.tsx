@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import SiteFooter from "./site-footer";
 
 type Day = {
   day: number;
@@ -317,6 +318,7 @@ export default function Home() {
   const reset = () => { if (window.confirm("Zerar o progresso deste plano?")) setDone((current) => current.filter((id) => !id.startsWith(`${planKey}-`))); };
 
   return (
+    <>
     <main>
       <nav className="topbar">
         <a className="brand" href="#inicio" aria-label="Rota CNH — início"><img className="brand-logo" src="/rota-cnh-logo.png" width="42" height="42" alt="" /><span>Rota CNH</span></a>
@@ -428,7 +430,7 @@ export default function Home() {
         })}
       </section>
 
-      <section className="tips-section">
+      <section className="tips-section" id="dicas">
         <div className="tips-heading"><span className="section-number">02 — COMO ESTUDAR</span><h2>Menos releitura.<br /><em>Mais memória.</em></h2></div>
         <div className="tips-grid">{quickTips.map((tip) => <article key={tip.title}><span>{tip.mark}</span><h3>{tip.title}</h3><p>{tip.text}</p></article>)}</div>
       </section>
@@ -445,7 +447,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="resources">
+      <section className="resources" id="materiais">
         <div><span className="section-number">MATERIAL CONFIÁVEL</span><h2>Para ir direto à fonte.</h2></div>
         <div className="resource-links">
           <a href="https://www.gov.br/transportes/pt-br/assuntos/transito/senatran/manuais-brasileiros-de-sinalizacao-de-transito" target="_blank" rel="noreferrer"><span>Manuais oficiais de sinalização</span><small>SENATRAN ↗</small></a>
@@ -463,7 +465,8 @@ export default function Home() {
         {currentDone.length > 0 && <button className="reset-button" onClick={reset}>Zerar progresso</button>}
       </section>
 
-      <footer><a className="brand" href="#inicio" aria-label="Rota CNH — início"><img className="brand-logo" src="/rota-cnh-logo.png" width="42" height="42" alt="" /><span>Rota CNH</span></a><p>Feito para estudar com leveza. Boa prova!</p><ExploreLink href="#inicio" label="Voltar ao topo" /></footer>
     </main>
+    <SiteFooter backToTop={<ExploreLink href="#inicio" label="Voltar ao topo" />} />
+    </>
   );
 }
